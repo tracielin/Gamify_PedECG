@@ -1,0 +1,29 @@
+.scenario {
+  font-style: italic;
+  font-family: sans-serif;
+  font-size: 22px;
+  text-align: center;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+body {
+background: linear-gradient(to top, #101010, #EEEEEE) fixed;
+font-family: sans-serif;
+}
+
+
+.button {
+  position: relative;
+  transform: translateZ(40px);
+  cursor: pointer;
+  font-weight: bold;
+  background: linear-gradient(135deg, #101010, darkblue);
+  color: #FFFFFF;
+  padding: 0.5em 1em;
+  border-radius: 100px;
+  font: inherit;
+  border: none;
+  transform-style: preserve-3d;
+  transition: 300ms ease;
+}

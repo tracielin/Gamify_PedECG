@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+ <title>Pediatric ST Elevation Escape Room: Elevator</title>
+
+
+<style>
+  *{
+    box-sizing: border-box;
+    font-family: arial;
+  }
+  body{
+    padding:0;
+    margin:0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+  background-image: url('stonewall.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+  a{
+    text-decoration: none;
+    color: #333;
+  }
+.row {
+  height:75%;
+}
+  .column {
+    float: left;
+    height: 100%;
+  }
+
+  .left, .right {
+    width: 35%;
+
+  }
+
+  .middle {
+    width: 30%;
+  }
+.ecgbox {
+  background: #dddddd;
+  border-radius: 15px;
+  padding: 25px;
+}
+  .jc-elevator{
+    background: #ececec;
+    width: 420px;
+    height: 430px;
+    position: relative;
+    top: 64%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-left: 6px solid #abb7b7;
+    border-right: 6px solid #abb7b7;
+    border-top: 6px solid #abb7b7;
+    border-bottom: 1px solid #adadbd;
+  }
+  .jc-floor{
+    position: relative;
+    top:3%;
+    left: 23%;
+    background: #dadfe1;
+    height: 30px;
+    width: 220px;
+    border: 2px solid #abb7b7;
+  }
+  .jc-floor h3{
+    color: #244D26;
+    position: relative;
+    top:-53%;
+    text-align: center;
+    font-size: 18px;
+}
+  .jc-floor h4{
+      color: #C93E3E;
+      position: relative;
+      top:-75%;
+      text-align: center;
+      font-size: 18px;
+  }
+  .jc-doors{
+       z-index:1;
+    background: #ecf0f1;
+    width: 350px;
+    height: 370px;
+    position:absolute;
+    bottom:0;
+    left:7.5%;
+    overflow:hidden;
+    border-left: 4px solid #abb7b5;
+    border-right: 4px solid #abb7b5;
+    border-top: 6px solid #abb7b5;
+  }
+
+  .jc-doors:before{
+    content: '';
+    background: #dadfe1;
+    border-right: 2px solid #abb7b2;
+    width: 170px;
+    height: 370px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: left 1s linear .5s forwards;
+  }
+  .jc-doors:after{
+    content: '';
+    background: #dadfe1;
+    border-left: 2px solid #abb7b2;
+    width: 170px;
+    height: 370px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    animation: right 1s linear .5s forwards;
+  }
+
+  .jc-doors div{
+    position:relative;
+    z-index: -1;
+    top: 20%;
+    color: #808080;
+    text-align: center;
+    line-height: 2;
+  }
+  .jc-doors div:nth-child(1){
+    font-size: 30px;
+  }
+  .jc-doors div:nth-child(2){
+    font-size: 18px;
+  }
+
+  .jc-doors-closed{
+       z-index:1;
+    background: #ecf0f1;
+    width: 350px;
+    height: 370px;
+    position:absolute;
+    bottom:0;
+    left:7.5%;
+    overflow:hidden;
+    border-left: 4px solid #abb7b5;
+    border-right: 4px solid #abb7b5;
+    border-top: 6px solid #abb7b5;
+  }
+
+  .jc-doors-closed:before{
+    content: '';
+    background: #dadfe1;
+    border-right: 2px solid #abb7b2;
+    width: 170px;
+    height: 370px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  /*  animation: left 1s linear .5s forwards; */
+  }
+  .jc-doors-closed:after{
+    content: '';
+    background: #dadfe1;
+    border-left: 2px solid #abb7b2;
+    width: 170px;
+    height: 370px;
+    position: absolute;
+    top: 0;
+    right: 0;
+/*    animation: right 1s linear .5s forwards; */
+  }
+
+  .jc-doors-closed div{
+    position:relative;
+    z-index: -1;
+    top: 20%;
+    color: #808080;
+    text-align: center;
+    line-height: 2;
+  }
+
+  .jc-switch{
+    position: absolute;
+    background: #dadfe1;
+    top: 45%;
+    left: 103%;
+    height: 30px;
+    width: 30px;
+    border: 2px solid #abb7b7;
+  }
+  .jc-switch a:nth-child(1){
+    position: absolute;
+    top: 25%;
+    left: 12%;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #2C9C3B;
+  }
+  .jc-switch2{
+    position: absolute;
+    background: #dadfe1;
+    top: 45%;
+    left: -10%;
+    height: 30px;
+    width: 30px;
+    border: 2px solid #abb7b7;
+  }
+  .jc-switch2 a:nth-child(1){
+    position: absolute;
+    top: 25%;
+    left: 12%;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #C93E3E;
+  }
+  /*.jc-switch a:nth-child(2){
+    content: '';
+    position: absolute;
+    bottom: 15%;
+    left: 12%;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #808080;
+  }*/
+
+  @keyframes left{
+    0%{
+      left:0;
+    }
+    100%{
+      left: -45%;
+    }
+  }
+  @keyframes right{
+    0%{
+      right: 0;
+    }
+    100%{
+      right: -45%;
+    }
+  }
+
+.ecgthumbnail {
+  width: 200px;
+  display: block;
+ margin-left: auto;
+ margin-right: auto;
+ border: 4px solid #FFFFFF;
+ border-radius: 4px;
+ padding: 1px;
+}
+
+img:hover {
+  box-shadow: 0 0 2px 2px rgba(0, 140, 186, 0.5);
+}
+
+
+  </style>
+</head>
+
+<body>
+
+  <div class="row">
+    <div class="column left">
+
+      <div class="jc-elevator">
+         <div id="whichelevator" class="jc-floor">
+            <h3>Normal Variant</h3>
+         </div>
+         <div id="doors" class="jc-doors">
+            <div>Sorry, <br>try again.</div>
+         </div>
+         <div class="jc-switch">
+            <a href="#"></a>
+            <a href="#"></a>
+         </div>
+      </div>
+    </div>
+
+    <div class="column middle">
+      <br><br><br><br><br><br><br><br><br><br>
+      <div class ="ecgbox">
+      <p align="center">17-year-old with chest pain</p>
+      <img src= "ECG.png" class="ecgthumbnail">
+    </div><br>
+      <div class ="ecgbox">
+      <p align="center">1) Show explanation.</p>
+    </div><br>
+      <div class ="ecgbox">
+      <p align="center" style="color:gray;">2) Give me a new ECG.</p>
+      </div>
+    </div>
+
+    <div class="column right">
+      <div class="jc-elevator">
+         <div id="whichelevator" class="jc-floor">
+            <h4>Pathological ST</h4>
+         </div>
+         <div id="doors" class="jc-doors-closed">
+            <div>Sorry, <br>try again.</div>
+         </div>
+         <div class="jc-switch2">
+            <a href="#"></a>
+            <a href="#"></a>
+         </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  </body>
+
+<footer>
+<!-- Elevator animation adapted from https://codepen.io/jeffcadampog/pen/jvGGWe -->
+<!--Stone background stock photo from https://www.deviantart.com/enframed -->
+  </footer>

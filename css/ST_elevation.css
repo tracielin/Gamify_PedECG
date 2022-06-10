@@ -6,10 +6,8 @@
 body {
   background: black;
 /* background: radial-gradient(#101010, #606070) fixed; */
-background: radial-gradient(closest-side, #010101, #060606, #191919) fixed;
-/* background: linear-gradient(to top, #101010, #EEEEEE) fixed; */
-font-family: sans-serif;
-  /* height: 100vh; */
+background: radial-gradient(closest-side, #010101, #060606,#060606, #0d1334) fixed;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -120,13 +118,6 @@ span:nth-child(18) {
   }
 }
 
-.navigatorbuttons{
-  position: relative;
-  top: 200px;
-/* animation-delay: 3s; */
-  animation: 3s anim-lineUp ease-out;
-    animation-iteration-count: 1;
-}
 @keyframes anim-lineUp {
   0% {
     opacity: 0;
@@ -145,18 +136,72 @@ span:nth-child(18) {
   }
 }
 
-.button {
+/* button shine */
+
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+  clear: both;
   position: relative;
-  transform: translateZ(40px);
+  top: 110px;
+}
+
+@keyframes TransitioningBackground {
+  0% {
+    background-position: 1% 0%;
+  }
+  50% {
+    background-position: 99% 100%;
+  }
+  100% {
+    background-position: 1% 0%;
+  }
+}
+.start-button {
+  font-size: 1rem;
+  font-weight: 550;
+  color: white;
+  text-align: center;
+  width: 110px;
+  height: 50px;
+  border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+  background-image: linear-gradient(0deg, #0d1334, #17009e);
+  background-size: 200% 200%;
+  animation: TransitioningBackground 2s ease infinite;
+  transition: 0.6s;
+}
+.start-button::before {
+  content: "";
+  display: block;
+  position: absolute;
+  background: rgba(255, 255, 255, 0.5);
+  width: 60px;
+  height: 100%;
+  top: 0;
+  filter: blur(30px);
+  transform: translateX(-100px) skewX(-15deg);
+}
+.start-button::after {
+  content: "";
+  display: block;
+  position: absolute;
+  background: rgba(255, 255, 255, 0.2);
+  width: 30px;
+  height: 100%;
+  top: 0;
+  filter: blur(5px);
+  transform: translateX(-100px) skewX(-15deg);
+}
+.start-button:hover {
+  background-image: linear-gradient(to top, #17009e, #0d1334);
+  transform: scale(1.2);
   cursor: pointer;
-  font-weight: bold;
-  font: inherit;
-  font-size: 18px;
-  background: linear-gradient(135deg, #101010, darkblue);
-  color: #FFFFFF;
-  padding: 0.5em 1em;
-  border-radius: 100px;
-  border: 3px #ffffff solid;
-  transform-style: preserve-3d;
-  transition: 300ms ease;
+}
+.start-button:hover::before, .start-button:hover::after {
+  transform: translateX(300px) skewX(-15deg);
+  transition: 0.7s;
 }

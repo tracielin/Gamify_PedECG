@@ -12,14 +12,29 @@ background: radial-gradient(closest-side, #010101, #060606,#060606, #0d1334) fix
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: Garamond, serif;
+}
+.plainlink:link{
+    color: #41476C;
+    text-decoration: none;
+}
+.plainlink:visited {
+      color: #41476C;
+      text-decoration: none;}
+.plainlink:active {
+      color: #41476C;
+      text-decoration: none; }
+.plainlink:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+/* @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap"); */
 
 h1 {
-  position: relative;
-  top: 170px;
-  font-family: "Montserrat";
+  /* position: relative;
+  top: 170px; */
+  /* font-family: "Montserrat"; */
   font-size: 28px;
   color: #F1F1F1;
   max-width: 100ch;
@@ -138,14 +153,8 @@ span:nth-child(18) {
 
 /* button shine */
 
-div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 600px;
-  clear: both;
-  position: relative;
-  top: 110px;
+.center{
+  text-align: center;
 }
 
 @keyframes TransitioningBackground {

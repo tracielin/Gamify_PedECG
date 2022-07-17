@@ -1,0 +1,21 @@
+html {
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 300;
+  color: #333;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ECF1FA;
+  background-attachment: fixed;
+}
+
+section {
+  outline: 1px black solid;
+  padding: 1px 20px 1px 20px;
+  margin: 15px;
+  background-color: #F9FAFD;
+}

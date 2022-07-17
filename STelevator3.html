@@ -17,7 +17,11 @@
     height: 100%;
     width: 100%;
     position: absolute;
-  }
+  background-image: url('imgs/stonewall.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
   a{
     text-decoration: none;
     color: #333;
@@ -38,7 +42,11 @@
   .middle {
     width: 30%;
   }
-
+.ecgbox {
+  background: #dddddd;
+  border-radius: 15px;
+  padding: 25px;
+}
   .jc-elevator{
     background: #ececec;
     width: 420px;
@@ -62,11 +70,18 @@
     border: 2px solid #abb7b7;
   }
   .jc-floor h3{
-    color: #808080;
+    color: #244D26;
     position: relative;
     top:-53%;
     text-align: center;
     font-size: 18px;
+}
+  .jc-floor h4{
+      color: #C93E3E;
+      position: relative;
+      top:-75%;
+      text-align: center;
+      font-size: 18px;
   }
   .jc-doors{
        z-index:1;
@@ -171,19 +186,36 @@
     background: #dadfe1;
     top: 45%;
     left: 103%;
-    height: 50px;
+    height: 30px;
     width: 30px;
     border: 2px solid #abb7b7;
   }
   .jc-switch a:nth-child(1){
     position: absolute;
-    top: 15%;
+    top: 25%;
     left: 12%;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-bottom: 10px solid #808080;
+    border-bottom: 10px solid #2C9C3B;
   }
-  .jc-switch a:nth-child(2){
+  .jc-switch2{
+    position: absolute;
+    background: #dadfe1;
+    top: 45%;
+    left: -10%;
+    height: 30px;
+    width: 30px;
+    border: 2px solid #abb7b7;
+  }
+  .jc-switch2 a:nth-child(1){
+    position: absolute;
+    top: 25%;
+    left: 12%;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #C93E3E;
+  }
+  /*.jc-switch a:nth-child(2){
     content: '';
     position: absolute;
     bottom: 15%;
@@ -191,7 +223,7 @@
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-top: 10px solid #808080;
-  }
+  }*/
 
   @keyframes left{
     0%{
@@ -221,7 +253,7 @@
 }
 
 img:hover {
-  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+  box-shadow: 0 0 2px 2px rgba(0, 140, 186, 0.5);
 }
 
 
@@ -231,7 +263,7 @@ img:hover {
 <body>
 
   <div class="row">
-    <div class="column left" style="background-color:#ccc;">
+    <div class="column left">
 
       <div class="jc-elevator">
          <div id="whichelevator" class="jc-floor">
@@ -247,21 +279,25 @@ img:hover {
       </div>
     </div>
 
-    <div class="column middle" style="background-color:#ccc;">
+    <div class="column middle">
       <br><br><br><br><br><br><br><br><br><br>
+      <div class ="ecgbox">
       <p align="center">What do you think of this patient's ST segments?</p>
-      <img src= "ECG.png" class="ecgthumbnail">
+      <img src= "imgs/ECG.png" class="ecgthumbnail">
+      <p>1) Examine ECG</p>
+      <p>2) Press the elevator button corresponding to your diagnosis: Normal (left) vs. Pathological (right).</p>
+      </div>
     </div>
 
-    <div class="column right" style="background-color:#ccc;">
+    <div class="column right">
       <div class="jc-elevator">
          <div id="whichelevator" class="jc-floor">
-            <h3>Pathological ST</h3>
+            <h4>Pathological ST</h4>
          </div>
          <div id="doors" class="jc-doors-closed">
             <div>Sorry, <br>try again.</div>
          </div>
-         <div class="jc-switch">
+         <div class="jc-switch2">
             <a href="#"></a>
             <a href="#"></a>
          </div>
@@ -276,4 +312,5 @@ img:hover {
 
 <footer>
 <!-- Elevator animation adapted from https://codepen.io/jeffcadampog/pen/jvGGWe -->
+<!--Stone background stock photo from https://www.deviantart.com/enframed -->
   </footer>

@@ -1,0 +1,120 @@
+body {
+	background-color: #333;
+/* 	font-family: Arial, Helvetica, sans-serif; */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+
+}
+
+/* Style the header */
+header {
+  background-color: #666;
+  padding: 0px;
+  text-align: center;
+  font-size: 30px;
+  color: white;
+}
+
+/* Container for flexboxes */
+section {
+  display: -webkit-flex;
+  display: flex;
+}
+
+/* Style the content */
+article {
+  -webkit-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+  background-color: #f1f1f1;
+  padding: 10px;
+}
+
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+/* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
+@media (max-width: 600px) {
+  section {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+
+/* title {
+	font-size: 0.5em;
+} */
+#myDIV {
+  width: 100%;
+  padding: 50px 0;
+  text-align: center;
+  background-color: lightblue;
+  margin-top: 20px;
+  display: none;
+}
+
+#top {
+	color: black;
+	text-align: center;
+	font-size: 4em;
+	font-family: monospace, bold;
+}
+
+#keypad {
+	min-width: 200px;
+	width: 25%;
+	background-color: gray;
+	margin: 0 auto;
+	overflow: auto;
+	/* to prevent margin collapse */
+}
+
+#keypad #screen {
+	height: 60px;
+	margin: 1%;
+	padding: 1% 2%;
+	background-color: #E1E5EE;
+	font-size: 3.5em;
+	letter-spacing: .4em;
+	font-family: monospace;
+	line-height: 65px;
+	text-align: right;
+}
+
+#keypad #screen.success {
+	background-color: #7AC74F;
+	border: 2px solid #A1CF6B;
+}
+
+#keypad #screen.failed {
+	background-color: #E0C879;
+	border: 2px solid #E87461;
+}
+
+#keypad #buttons {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+#keypad button {
+	background-color: #ccc;
+	box-sizing: border-box;
+	width: 30%;
+	margin: .7% 1.65%;
+	height: 60px;
+	font-size: 2.7em;
+	font-family: monospace;
+}

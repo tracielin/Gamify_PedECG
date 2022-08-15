@@ -43,7 +43,7 @@ window.addEventListener('load', function() {
 		if (isCorrect()) {
 			screen.classList.add('success');
 			screen.textContent = 'success';
-			var x = document.getElementById("myDIV");
+			var x = document.getElementById("answerDIV");
      if (x.style.display === "block") {
     x.style.display = "none";
      } else {

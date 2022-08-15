@@ -13,10 +13,10 @@ body {
 
 /* Style the header */
 header {
-  background-color: #666;
+  /* background-color: #666; */
   padding: 0px;
   text-align: center;
-  font-size: 30px;
+  font-size: 20px;
   color: white;
 }
 
@@ -28,9 +28,9 @@ section {
 
 /* Style the content */
 article {
-  -webkit-flex: 3;
-  -ms-flex: 3;
-  flex: 3;
+  -webkit-flex: 2;
+  -ms-flex: 2;
+  flex: 2;
   background-color: #f1f1f1;
   padding: 10px;
 }
@@ -50,18 +50,17 @@ footer {
     flex-direction: column;
   }
 }
-
-
 /* title {
 	font-size: 0.5em;
 } */
-#myDIV {
+#answerDIV {
   width: 100%;
-  padding: 50px 0;
+  padding: 20px 0;
   text-align: center;
-  background-color: lightblue;
-  margin-top: 20px;
+  background-color: #7AC74F;
+	color: black;
   display: none;
+	font-size: 1.2em;
 }
 
 #top {
@@ -72,7 +71,7 @@ footer {
 }
 
 #keypad {
-	min-width: 200px;
+	min-width: 400px;
 	width: 25%;
 	background-color: gray;
 	margin: 0 auto;
@@ -85,7 +84,7 @@ footer {
 	margin: 1%;
 	padding: 1% 2%;
 	background-color: #E1E5EE;
-	font-size: 3.5em;
+	font-size: 3.4em;
 	letter-spacing: .4em;
 	font-family: monospace;
 	line-height: 65px;

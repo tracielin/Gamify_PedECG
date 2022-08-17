@@ -16,7 +16,7 @@ header {
   /* background-color: #666; */
   padding: 0px;
   text-align: center;
-  font-size: 20px;
+  font-size: 12px;
   color: white;
 }
 
@@ -34,11 +34,28 @@ article {
   background-color: #f1f1f1;
   padding: 10px;
 }
+.container {
+  position: relative;
+  text-align: center;
+  color: black;
+	font-size: 1.4em;
+}
+.postit {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+ /* width:100%; */
+	max-width: 700px;
+}
+.top-left {
+  position: absolute;
+  top: 5px;
+  left: 20px;
+}
 
-/* Style the footer */
 footer {
   background-color: #777;
-  padding: 10px;
+  padding: 0px;
   text-align: center;
   color: white;
 }
@@ -55,7 +72,7 @@ footer {
 } */
 #answerDIV {
   width: 100%;
-  padding: 20px 0;
+  padding: 10px 0;
   text-align: center;
   background-color: #7AC74F;
 	color: black;
@@ -66,14 +83,14 @@ footer {
 #top {
 	color: black;
 	text-align: center;
-	font-size: 4em;
+	font-size: 3.5em;
 	font-family: monospace, bold;
 }
 
 #keypad {
 	min-width: 400px;
 	width: 25%;
-	background-color: gray;
+	background-color: #AAA;
 	margin: 0 auto;
 	overflow: auto;
 	/* to prevent margin collapse */

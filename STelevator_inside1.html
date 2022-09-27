@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+ <title>Pediatric ST Elevation Escape Room: Elevator</title>
+
+
+<style>
+#floor1 {
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/239616/August_097.jpg") no-repeat;
+  height: 800px;
+ }
+
+#floor2 {
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/239616/DavesPlaces.PNG") no-repeat;
+  height: 800px;
+}
+
+#floor3 {
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/239616/IMAG00088.jpg") center no-repeat;
+  height: 800px;
+}
+
+#floor4 {
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/239616/WP_20140722_004.jpg") no-repeat;
+  height: 800px;
+}
+
+#body {
+  position: relative;
+}
+
+#panel {
+  font-family: arial;
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  width: 200px;
+  height: 350px;
+  background-color: rgb(211, 211, 211);
+  background-size: 2px;
+  padding: 1%;
+  border: 2px solid;
+}
+
+#screen {
+  font-family: arial;
+  width: 100%;
+  height: 50;
+  background-color: black;
+}
+
+#controls {
+  width: 100%;
+  text-align: center;
+  margin: 5% auto;
+}
+
+#floor-number {
+  display: inline-block;
+  color: #fff;
+  font-size: 8em;
+  margin-left: 20%;
+}
+
+#indicator {
+  display: inline-block;
+  margin-left: 15%;
+}
+
+#green-indicator {
+  background-color: rgb(0, 255, 0);
+  opacity: 0;
+}
+
+#red-indicator {
+  background-color: rgb(255, 0, 0);
+  opacity: 0;
+}
+
+.indicator {
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+}
+
+.button {
+  text-align: center;
+  height: 50px;
+  width: 50px;
+  font-size: 2em;
+  margin: 20px 20px 20px 20px;
+  border-radius: 50%;
+  border: 2px solid;
+  background-color: rgb(255, 255, 255);
+}
+
+.glow {
+  color: rgb(100, 0, 200);
+}
+
+.level {
+  width: 65%;
+  color: rgb(211, 211, 211);
+  font-size: 8em;
+}
+
+
+</style>
+<script src="elevatorinside1.js"></script>
+
+</head>
+
+<body>
+
+
+  <!--Floor image to sync with selected elevator floor-->
+  <div id="floor4" class="level">4</div>
+  <div id="floor3" class="level">3</div>
+  <div id="floor2" class="level">2</div>
+  <div id="floor1" class="level">1</div>
+
+  <!--Main elevator panel-->
+  <div id="panel">
+    <div id="screen">
+      <div id="floor-number">1</div>
+      <!--Up and down indicators (Red/Green) -->
+      <div id="indicator">
+          <div id="green-indicator" class="indicator"></div>
+          <div id="red-indicator" class="indicator"></div>
+      </div>
+    </div>
+
+
+    <!--Buttons on control panel-->
+    <div id="controls">
+      <button class="button">3</button>
+      <button class="button">4</button>
+      <button class="button">1</button>
+      <button class="button">2</button>
+    </div>
+  </div>
+
+
+
+  </body>
+
+<footer>
+
+
+  </footer>

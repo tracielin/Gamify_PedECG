@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="status-info">
+    <h1 class="title">Your progress</h1>
+    <div class="bar-wrap">
+      <div class="bar"></div>
+    </div>
+    <span class="percentage"></span>
+    <p class="line">Number of puzzles: <span class="number" id="num1"></span></p>
+    <p class="line">Solved puzzles: <span class="number" id="num2"></span></p>
+  </div>
+
+  <div class="btn-wrap">
+    <button class="btn" id="add" type="button">&plus;</button>
+    <button class="btn" id="sub" type="butotn">&minus;</button>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+body {
+    font: 14px Helvetica, Arial, sans-serif;
+    width: 100%;
+    margin: 0;
+}
+
+.scoreboard{
+    margin: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    background: #fff;
+    margin-bottom: -20px;    
+}
+
+.ans {
+    text-align: center;
+}
+
+.ans a {
+    margin-right: 10px;
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: #333;   
+}
+
+.ans a:hover {
+    color: #055;
+}
+
+
+.main {
+    margin: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.subtitle {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: 1.5rem;
+    padding-top: 30px;
+}
+
+.contentbox {
+  height: 100vh;
+}
+
+;

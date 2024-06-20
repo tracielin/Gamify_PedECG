@@ -1,0 +1,148 @@
+body {
+    font-family: sans-serif;
+    width: 100%;
+    margin: 0;
+}
+
+.scoreboard{
+    margin: 0px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+    text-align: center;
+    font-size: 10px ;
+    position: sticky;
+    top: 0;
+    background: #fff;
+    margin-bottom: -20px;    
+}
+
+.ans {
+    text-align: center;
+}
+
+.ans a {
+    margin-right: 10px;
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: #333;   
+}
+
+.ans a:hover {
+    color: #055;
+}
+
+
+.main {
+    margin: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.subtitle {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: 1.5rem;
+    padding-top: 120px;
+}
+
+.contentbox {
+  height: 100vh;
+}
+
+/* For score board */
+
+* {
+  box-sizing: border-box;
+}
+
+.status-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+  font-size: clamp(3.2rem, 6vw, 4.8rem);
+  color: var(--text-color);
+}
+
+.bar-wrap {
+  padding: 6px;
+  margin-top: 50px;
+  margin-right: 30px;
+  margin-left: 30px;
+  margin-bottom: 5px;
+  border-radius: 100px;
+  background-color: #eeeeee;
+}
+
+#bar {
+  width: 0%;
+  height: 10px;
+  transition: width .15s ease-out;
+  background: linear-gradient(white, purple 90%, rebeccapurple);
+  border-radius: 100px;
+  box-shadow: inset -1px -1px 10px rgb(0 0 0 / .5);
+}
+
+
+.percentage {
+  align-self: center;
+  margin: 10px 0 25px;
+  font-family: sans-serif;
+  font-size: 14px;
+  color: black;
+}
+
+.pointslabel {
+  margin: 0;
+  font-size: 14px;
+  color: black;
+}
+
+.number {
+  margin-left: 8px;
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+.btn-wrap {
+  align-self: center;
+}
+
+.btn-group{
+  background: darkgray;
+  border: solid white 2px;
+  display: inline-flex;
+  height: 180px;
+  border-radius: 30px;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 80px;
+  border: 3px solid black;
+  margin: 1rem;
+  font-family: sans-serif;
+  font-size: 16px;
+  transition: background .15s, color .15s;
+  border-radius: 30px;
+  background-color: blue;
+  color: white;
+}
+
+.btn:active {
+  background-color: var(--body-color);
+  color: var(--text-color);
+}
+.btn:hover {
+  background-color: lightgray;
+}
+
+
+;

@@ -1,0 +1,70 @@
+
+<html>
+    <head>
+        <title>Page Title</title>
+        
+        <link rel="stylesheet" href="css/jumpto_w_score.css">
+        
+    </head>
+<body>
+    
+<section class ="scoreboard">
+
+  <div class="status-info">
+    <div class="bar-wrap">
+      <div id="bar"></div>
+    </div>
+  
+     <p class="pointslabel">Heart Points: <span class="number" id="num2"></span></p>
+     <!--<p class="pointslabel">Total Needed to Complete Level: <span class="number" id="num1"></span></p>-->
+   
+
+    <p class ="pointslabel">Your Gamer SpO2 <span class="percentage"></span> </p>
+
+  </div>
+
+</section>
+        
+    
+    <section class="main">
+        <h2 id="home" class="subtitle">Home</h2>
+            <div class="contentbox">stuff here
+                <div class="ans">
+                <a onclick="scrollInto('ans_right_unsure')">AnswerRightUnsure</a>
+                <a onclick="scrollInto('ans_right_confid')">AnswerRightConfid</a>
+                <a onclick="scrollInto('ans_wrong_unsure')">AnswerWrongUnsure</a>
+                <a onclick="scrollInto('ans_wrong_confid')">AnswerWrongConfid</a>
+                </div>
+
+            <div class="btn-wrap">
+                <div class="btn-group">
+                  <p>Normal Variant</p>
+                  <button class="btn" id="add" type="button">low confidence (correct)</button>
+                  <button class="btn" id="add2" type="button">high confidence (correct)</button>
+                </div>
+                <div class="btn-group">
+                  <p>Pathological</p>
+                  <button class="btn" id="sub" type="button">low confidence (incorrect)</button>
+                  <button class="btn" id="sub2" type="button">high confidence (incorrect)</button>
+                </div>
+            </div>
+
+            </div>          
+    
+        <h2 id="ans_right_confid" class="subtitle">News</h2>
+        <div class="contentbox">person clicked the right answer and was confident</div>        
+        
+        <h2 id="ans_wrong_unsure" class="subtitle">Contact</h2>
+        <div class="contentbox">person clicked wrong answer but was unsure</div>   
+        
+        <h2 id="ans_wrong_confid" class="subtitle">About</h2>
+        <div class="contentbox">person clicked the wrong answer and was confidently wrong</div> 
+    </section>
+
+<!-- original sources for the code that I am playing with: https://www.sololearn.com/en/compiler-playground/WoO2OqIZ6d4y/?ref=app-->
+         
+</body>
+
+<script  src="./js/jumpto_w_score.js"></script>
+</html>
+

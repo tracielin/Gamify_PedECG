@@ -1,0 +1,45 @@
+
+<html>
+    <head>
+        <title>Page Title</title>
+        
+        <link rel="stylesheet" href="css/jumpto.css">
+        
+    </head>
+<body>
+    
+<section class ="scoreboard">
+    Scoreboard will go here
+
+</section>
+        
+    
+    <section class="main">
+        <h2 id="home" class="subtitle">Home</h2>
+            <div class="contentbox">stuff here
+                <div class="ans">
+                <a onclick="scrollInto('ans_right_unsure')">AnswerRightUnsure</a>
+                <a onclick="scrollInto('ans_right_confid')">AnswerRightConfid</a>
+                <a onclick="scrollInto('ans_wrong_unsure')">AnswerWrongUnsure</a>
+                <a onclick="scrollInto('ans_wrong_confid')">AnswerWrongConfid</a>
+                </div>
+
+            </div>          
+    
+        <h2 id="ans_right_confid" class="subtitle">News</h2>
+        <div class="contentbox">person clicked the right answer and was confident</div>        
+        
+        <h2 id="ans_wrong_unsure" class="subtitle">Contact</h2>
+        <div class="contentbox">person clicked wrong answer but was unsure</div>   
+        
+        <h2 id="ans_wrong_confid" class="subtitle">About</h2>
+        <div class="contentbox">person clicked the wrong answer and was confidently wrong</div> 
+    </section>
+
+<!-- original sources for the code that I am playing with: https://www.sololearn.com/en/compiler-playground/WoO2OqIZ6d4y/?ref=app-->
+         
+</body>
+
+<script  src="./js/jumpto.js"></script>
+</html>
+

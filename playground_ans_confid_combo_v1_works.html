@@ -1,0 +1,88 @@
+<html>
+<head>
+<style type="text/css">
+.answerdiv {
+  height: 100vh;
+  width: 100%;
+  background-color: coral;
+}
+</style>
+</head>
+
+<body>
+
+  <p>what's the right answer?</p>
+    <input type="radio" id="question1answer1" name="question1answer" class= "question1answer" value="question1answer1">
+      <label for="question1answer1">Answer 1</label><br>
+    <input type="radio" id="question1answer2" name="question1answer" class= "question1answer" value="question1answer2">
+      <label for="question1answer2">Answer 2</label><br>
+    <input type="radio" id="question1answer3" name="question1answer" class= "question1answer" value="question1answer3">
+      <label for="question1answer3">Answer 3</label>
+  <br>
+
+    <input type="radio" id="question1unsure" name="question1confidence" value="question1unsure">
+      <label for="question1unsure">Unsure</label><br>
+    <input type="radio" id="question1modcertain" name="question1confidence" value="question1modcertain">
+      <label for="question1modcertain">Moderately Certain</label><br>
+    <input type="radio" id="question1confident" name="question1confidence" value="question1confident">
+      <label for="question1confident">Confident</label>
+
+<br>
+  <button onclick="scrollToElement()">Submit</button>
+<p></p>
+
+  <div id="question1answer1question1unsure" class="answerdiv">
+    Person selected answer 1 but was unsure
+  </div>
+    <div id="question1answer1question1modcertain" class="answerdiv">
+    Person selected answer 1 but was moderately certain
+  </div>
+  <div id="question1answer1question1confident" class="answerdiv">
+    Person selected answer 1 confidently
+  </div>
+
+<!-- </div> -->
+
+<script type="text/javascript">
+  function scrollToElement() {
+
+  if (document.getElementById('question1answer1').checked) 
+      {
+        radioinput = document.getElementById('question1answer1').value;
+      }
+  else if (document.getElementById('question1answer2').checked)   
+      {
+        radioinput = document.getElementById('question1answer2').value;
+      }
+  else if (document.getElementById('question1answer3').checked)   
+      {
+        radioinput = document.getElementById('question1answer3').value;
+      }    
+  else
+      {
+         alert("Please select an answer to proceed.");
+      }
+  if (document.getElementById('question1unsure').checked) 
+      {
+        confidence = document.getElementById('question1unsure').value;
+      }
+  else if (document.getElementById('question1modcertain').checked)   
+      {
+        confidence = document.getElementById('question1modcertain').value;
+      }
+  else if (document.getElementById('question1confident').checked)   
+      {
+        confidence = document.getElementById('question1confident').value;
+      }    
+  else
+      {
+         alert("Please select a confidence level to proceed.");
+      }
+  var combo = radioinput+confidence;
+  var section = document.getElementById(combo);
+  section.scrollIntoView({behavior:'smooth', block:'start'});
+}
+</script>
+
+</body>
+</html>

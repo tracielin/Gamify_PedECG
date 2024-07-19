@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Semicircle Fill</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #controls {
+            display: flex;
+            flex-direction: column;
+            margin-right: 20px;
+        }
+        button {
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: 2px solid gray; /* Thin gray outline for all buttons */
+            border-radius: 5px; /* Rounded corners for buttons */
+        }
+        .active-button {
+            border-color: black; /* Bold outline for active button */
+            border-width: 5px;   /* Thicker outline */
+        }
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <button id="greenButton" style="background-color: green; color: white;">Green</button>
+        <button id="blueButton" style="background-color: blue; color: white;">Blue</button>
+        <button id="redButton" style="background-color: red; color: white;">Red</button>
+        <button id="qrsButton">QRS Axis</button>
+        <button id="startOverButton">Start Over</button>
+    </div>
+    <canvas id="circleCanvas" width="400" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById('circleCanvas');
+        const ctx = canvas.getContext('2d');
+        const radius = 150;
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const snapAngle = Math.PI / 6; // 30 degrees in radians
+        let isGreenFixed = false;
+        let isBlueFixed = false;
+        let isRedFixed = false;
+        let angleGreen = 0;
+        let angleBlue = 0;
+        let angleRed = 0;
+        let activeColor = null; // No color is active initially
+
+        function drawCircle() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw full circle
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+            ctx.stroke();
+
+            // Draw green semicircle
+            if (isGreenFixed || activeColor === 'green') {
+                fillHalfMoon(angleGreen, 'rgba(0, 128, 0, 0.2)');
+            }
+
+            // Draw blue semicircle
+            if (isBlueFixed || activeColor === 'blue') {
+                fillHalfMoon(angleBlue, 'rgba(0, 0, 255, 0.2)');
+            }
+
+            // Draw red semicircle
+            if (isRedFixed || activeColor === 'red') {
+                fillHalfMoon(angleRed, 'rgba(255, 0, 0, 0.2)');
+            }
+        }
+
+        function fillHalfMoon(angle, color) {
+            const startAngle = angle - Math.PI / 2;
+            const endAngle = angle + Math.PI / 2;
+            
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+            ctx.closePath();
+            ctx.fillStyle = color; // 20% opacity
+            ctx.fill();
+        }
+
+        function drawArrow(angle) {
+            // Draw arrow
+            const arrowLength = radius;
+            const endX = centerX + arrowLength * Math.cos(angle);
+            const endY = centerY + arrowLength * Math.sin(angle);
+
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(endX, endY);
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Draw arrowhead
+            const arrowHeadSize = 10;
+            ctx.beginPath();
+            ctx.moveTo(endX, endY);
+            ctx.lineTo(endX - arrowHeadSize * Math.cos(angle - Math.PI / 6), endY - arrowHeadSize * Math.sin(angle - Math.PI / 6));
+            ctx.lineTo(endX - arrowHeadSize * Math.cos(angle + Math.PI / 6), endY - arrowHeadSize * Math.sin(angle + Math.PI / 6));
+            ctx.closePath();
+            ctx.fillStyle = 'black';
+            ctx.fill();
+        }
+
+        function calculateOverlapAngle() {
+            const angles = [];
+            if (isGreenFixed || activeColor === 'green') angles.push(angleGreen);
+            if (isBlueFixed || activeColor === 'blue') angles.push(angleBlue);
+            if (isRedFixed || activeColor === 'red') angles.push(angleRed);
+
+            if (angles.length === 1) {
+                // Only one semicircle is visible
+                return angles[0];
+            } else if (angles.length === 2) {
+                // Two semicircles are visible
+                const [angle1, angle2] = angles;
+                const startAngle = Math.min(angle1, angle2);
+                const endAngle = Math.max(angle1, angle2);
+                return startAngle + (endAngle - startAngle) / 2;
+            } else if (angles.length === 3) {
+                // Three semicircles are visible
+                const minAngle = Math.min(...angles);
+                const maxAngle = Math.max(...angles);
+                return minAngle + (maxAngle - minAngle) / 2;
+            }
+            return 0;
+        }
+
+        function updateButtonStyles() {
+            const buttons = {
+                green: document.getElementById('greenButton'),
+                blue: document.getElementById('blueButton'),
+                red: document.getElementById('redButton')
+            };
+            
+            Object.keys(buttons).forEach(color => {
+                if (color === activeColor) {
+                    buttons[color].classList.add('active-button');
+                } else {
+                    buttons[color].classList.remove('active-button');
+                }
+            });
+        }
+
+        function resetButtonStyles() {
+            // Reset all buttons to thin gray outline
+            document.querySelectorAll('#controls button').forEach(button => {
+                button.classList.remove('active-button');
+            });
+        }
+
+        canvas.addEventListener('mousemove', function(event) {
+            if ((activeColor === 'green' && !isGreenFixed) || 
+                (activeColor === 'blue' && !isBlueFixed) || 
+                (activeColor === 'red' && !isRedFixed)) {
+                const rect = canvas.getBoundingClientRect();
+                const mouseX = event.clientX - rect.left;
+                const mouseY = event.clientY - rect.top;
+                const angle = Math.atan2(mouseY - centerY, mouseX - centerX);
+
+                // Snap the angle to the nearest 30 degrees (π/6 radians)
+                const snappedAngle = Math.round(angle / snapAngle) * snapAngle;
+
+                if (activeColor === 'green') {
+                    angleGreen = snappedAngle;
+                } else if (activeColor === 'blue') {
+                    angleBlue = snappedAngle;
+                } else if (activeColor === 'red') {
+                    angleRed = snappedAngle;
+                }
+
+                drawCircle();
+            }
+        });
+
+        canvas.addEventListener('click', function() {
+            if (activeColor === 'green') {
+                isGreenFixed = !isGreenFixed;
+            } else if (activeColor === 'blue') {
+                isBlueFixed = !isBlueFixed;
+            } else if (activeColor === 'red') {
+                isRedFixed = !isRedFixed;
+            }
+            drawCircle();
+        });
+
+        document.getElementById('greenButton').addEventListener('click', function() {
+            activeColor = 'green';
+            // Make green semicircle moveable
+            isGreenFixed = false; 
+            updateButtonStyles(); // Update button styles
+            drawCircle();
+        });
+
+        document.getElementById('blueButton').addEventListener('click', function() {
+            activeColor = 'blue';
+            // Make blue semicircle moveable
+            isBlueFixed = false; 
+            updateButtonStyles(); // Update button styles
+            drawCircle();
+        });
+
+        document.getElementById('redButton').addEventListener('click', function() {
+            activeColor = 'red';
+            // Make red semicircle moveable
+            isRedFixed = false; 
+            updateButtonStyles(); // Update button styles
+            drawCircle();
+        });
+
+        document.getElementById('qrsButton').addEventListener('click', function() {
+            drawCircle(); // Ensure all semicircles are drawn
+            const overlapAngle = calculateOverlapAngle();
+            drawArrow(overlapAngle);
+
+            // Reset button styles to thin gray outline
+            resetButtonStyles();
+        });
+
+        document.getElementById('startOverButton').addEventListener('click', function() {
+            isGreenFixed = false;
+            isBlueFixed = false;
+            isRedFixed = false;
+            angleGreen = 0;
+            angleBlue = 0;
+            angleRed = 0;
+            activeColor = null;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Set initial button style (no button should be active)
+            resetButtonStyles();
+
+            drawCircle();
+        });
+
+        // Set initial button style
+        resetButtonStyles();
+
+        drawCircle();
+    </script>
+</body>
+</html>
+
+
+<!-- Some elements were created using the assistance of Chat GPT-4o and subsequently modified to fit my desired outcomes.-->

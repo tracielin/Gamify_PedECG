@@ -1,4 +1,4 @@
-# Escape_PedECG
+# Gamify_PedECG
 An interactive, continually-changing virtual "escape room" experience for learning how to read pediatric ECGs.
 
 https://tracielin.github.io/Gamify_PedECG/

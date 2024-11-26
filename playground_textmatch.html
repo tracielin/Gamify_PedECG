@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentence Matcher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #result {
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        #officialAnswer {
+            font-style: italic;
+            margin-top: 15px;
+            color: gray;
+        }
+        .underline {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>ECG Read Extraordinaire</h1>
+    <p>What's your ECG interpretation?</p>
+    
+    <!-- Text input for user -->
+    <textarea id="userInput" rows="4" cols="50" placeholder="Type your interpretation here..."></textarea><br>
+    
+    <!-- Button to check the sentence -->
+    <button onclick="checkSentence()">Check Your ECG Interpretation</button>
+    
+    <!-- Result display -->
+    <div id="result"></div>
+    
+    <!-- Display the official answer -->
+    <div id="officialAnswer"></div>
+
+    <script>
+        // Predefined sentence
+        const predefinedSentence = "Sinus rhythm with PR prolongation";
+
+        // Words to ignore in comparisons
+        const ignoredWords = ["and", "with", "but", ".", ",", ";"];
+
+        // Phrases to allow substitution (case insensitive)
+        const phraseSubstitutions = {
+            "sinus": "normal sinus rhythm",
+            "sinus": "normal sinus",
+            "sinus": "sinus rhythm",
+            "normal sinus rhythm": "sinus rhythm",
+            "normal sinus rhythm": "sinus",
+            "normal sinus rhythm": "normal sinus",
+            "sinus rhythm": "normal sinus rhythm",
+            "sinus rhythm": "sinus",
+            "sinus rhythm": "normal sinus",
+            "PR prolongation": "first degree AV block",
+            "PR prolongation": "first degree heart block",
+            "PR prolongation": "first degree block",
+            "first degree AV block": "PR prolongation",
+            "first degree heart block": "PR prolongation",
+            "first degree block": "PR prolongation"
+        };
+
+        // Function to preprocess a sentence (removing ignored words, punctuation, and extra spaces)
+        function preprocessSentence(sentence) {
+            return sentence
+                .toLowerCase() // Convert to lowercase
+                .replace(/[.,;]/g, "") // Remove commas, periods, and semicolons
+                .split(/\s+/) // Split by one or more spaces
+                .filter(word => !ignoredWords.includes(word)) // Remove ignored words
+                .join(" ") // Join back into a string with single spaces
+                .trim(); // Trim leading and trailing spaces
+        }
+
+        // Function to apply phrase substitutions to a sentence (case insensitive)
+        function applyPhraseSubstitutions(sentence) {
+            for (let key in phraseSubstitutions) {
+                // Create a case-insensitive regex to replace phrases
+                const regex = new RegExp(key, "gi");
+                sentence = sentence.replace(regex, phraseSubstitutions[key]);
+            }
+            return sentence;
+        }
+
+        // Function to check the user input
+        function checkSentence() {
+            // Get the user input and preprocess it
+            const userInput = preprocessSentence(document.getElementById("userInput").value.trim());
+            let predefinedProcessed = preprocessSentence(predefinedSentence);
+
+            // Apply phrase substitutions to both the user input and predefined sentence
+            const userInputProcessed = applyPhraseSubstitutions(userInput);
+            const predefinedProcessedWithSubstitutions = applyPhraseSubstitutions(predefinedProcessed);
+
+            const result = document.getElementById("result");
+            const officialAnswer = document.getElementById("officialAnswer");
+            
+            // Clear previous result and official answer
+            result.textContent = "";
+            officialAnswer.innerHTML = "";
+
+            // Check for exact match
+            if (userInputProcessed === predefinedProcessedWithSubstitutions) {
+                result.textContent = "✅ Correct!";
+                result.style.color = "green";
+                officialAnswer.innerHTML = "<b><u>Official answer</u>:</b> " + predefinedSentence;
+            } 
+            // Check if part of the sentence matches
+            else if (containsSomeMatch(userInputProcessed, predefinedProcessedWithSubstitutions)) {
+                result.textContent = "🔄 Thanks for playing. How closely did your answer match the official answer below?";
+                result.style.color = "orange";
+                officialAnswer.innerHTML = "<b><u>Official answer</u>:</b> " + predefinedSentence;
+            } 
+            // If no match
+            else {
+                result.textContent = "❌ Sorry, your answer did not match the official answer. Please review the answer to better understand why.";
+                result.style.color = "red";
+                officialAnswer.innerHTML = "<u><b>Official answer</u>:</b> " + predefinedSentence;
+            }
+        }
+
+        // Function to check if some words match between input and predefined sentence
+        function containsSomeMatch(input, predefined) {
+            const inputWords = input.split(/\s+/);  // Split by spaces
+            const predefinedWords = predefined.split(/\s+/);
+            let matchCount = 0;
+
+            // Count how many words are in both the input and the predefined sentence
+            inputWords.forEach(word => {
+                if (predefinedWords.includes(word)) {
+                    matchCount++;
+                }
+            });
+
+            // If at least one word matches, return true
+            return matchCount > 0;
+        }
+    </script>
+</body>
+</html>

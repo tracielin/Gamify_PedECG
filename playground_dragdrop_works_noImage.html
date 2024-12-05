@@ -1,23 +1,14 @@
-
-
-<!--Close. Able to make markers of two colors and change colors, but unable to erase existing markers.-->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Markup ECG with Two Colors</title>
-  <link rel="stylesheet" href="css/playground_clickpredefined_twocolors.css">
+  <title>Drag and Drop Marker</title>
+  <link rel="stylesheet" href="css/playground_dragdrop1.css">
 </head>
 <body>
-  <div class="marker-controls">
-    <div id="red-marker" class="marker">Marker 1 (Red)</div>
-    <div id="purple-marker" class="marker">Marker 2 (Purple)</div>
-    <div id="eraser" class="marker">Eraser</div>
-  </div>
-
   <div class="container">
+
     <div class="line">
       <div class="predefined-location" data-index="0"></div>
       <div class="predefined-location" data-index="1"></div>
@@ -30,10 +21,10 @@
       <div class="predefined-location" data-index="8"></div>
       <div class="predefined-location" data-index="9"></div>
     </div>
+    <div id="marker" draggable="true"></div>
     <div id="hover-line"></div>
     <img src="imgs/ECG.png" width="800px" z-index=0 class="ecg">    
   </div>
-
-  <script src="js/playground_clickpredefined_twocolors.js"></script>
+  <script src="js/playground_dragdrop1.js"></script>
 </body>
 </html>

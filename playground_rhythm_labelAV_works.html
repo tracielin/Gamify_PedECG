@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clickable Image</title>
+    <link rel="stylesheet" href="css/playground_rhythm_labelAV.css">
+</head>
+<body>
+    <div class="container">
+        <div class="color-selector">
+            <label><input type="radio" name="dotColor" value="red" checked> A (atrial signals)</label>
+          <label><input type="radio" name="dotColor" value="blue"> V (ventricular signals)</label>
+        </div>
+      <p><i>Click on a dot to delete it.</i></p>
+        <img id="myImage" src="https://github.com/tracielin/Gamify_PedECG/blob/main/imgs/ECG.png?raw=true" alt="rhythm strip">
+        <div id="dot-container"></div>
+    </div>
+    <script src="js/playground_rhythm_labelAV.js"></script>
+</body>
+</html>

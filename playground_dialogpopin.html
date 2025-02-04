@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<title></title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Jersey+25&display=swap');
+    .jersey-25-regular {
+      font-family: "Jersey 25", serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+html {
+  font-family: "Jersey 25", Roboto, sans-serif;
+}
+
+/*   IS-OPEN STATE   */
+dialog[open] {
+  translate: 0 0;
+}
+
+/*   EXIT STATE   */
+dialog {
+  transition: translate 0.7s ease-out, overlay 0.7s ease-out, display 0.7s ease-out allow-discrete;
+  translate: 0 100vh;
+  
+  /* other styles */
+  border: 6px solid;
+  border-radius: 20px;
+  box-shadow: 10px 10px 0 darkgray;
+}
+
+/*   0. BEFORE-OPEN STATE   */
+@starting-style {
+  dialog[open] {
+    translate: 0 100vh;
+  }
+}
+
+/* Etc */
+
+body {
+  padding: 1.5rem;
+}
+
+body,
+button {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+button {
+  padding: 1rem;
+  background: linear-gradient(-45deg in oklch,  #f07030, blue);
+  color: white;
+  border: 6px solid darkcyan;
+  border-radius: 1rem;
+}
+
+h2, p {
+  margin: 0;
+}
+
+p {
+  margin-bottom: 2rem;
+  font-size: 1.3rem;
+}
+
+
+</style>
+</head>
+
+<body>
+
+
+<button onclick="document.querySelector('dialog').showModal()">Show the answer</button>  
+<dialog>
+  <h2>Nice job!</h2>
+  <p>"Normal variant" was the correct answer.</p>
+  <form method="dialog">
+    <button>Got it!</button>
+  </form>
+</dialog>
+
+
+
+<script type="text/javascript">
+
+
+</script>
+</body>
+
+<footer>
+</footer>

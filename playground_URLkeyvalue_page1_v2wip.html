@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>URL Key-Value Pairs</title>
+    <style>
+        .button {
+            background-color: #1c87c9;
+            border: none;
+            color: white;
+            padding: 20px 34px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Question 1</h1>
+<a href="playground_URLkeyvalue_page2_v2wip.html?q1=a1c0&gs=0" class="button" onclick="updateHref(this)">Question 1 Button A: User answers question 1 with __ behavior</a>
+<a href="playground_URLkeyvalue_page2_v2wip.html?q1=a1c1&gs=0" class="button" onclick="updateHref(this)">Question 1 Button B: User answers question 1 with __ behavior</a>
+<a href="playground_URLkeyvalue_page2_v2wip.html?q1=a2c0&gs=0" class="button" onclick="updateHref(this)">Question 1 Button C: User answers question 1 with __ behavior</a>
+<a href="playground_URLkeyvalue_page2_v2wip.html?q1=a2c1&gs=0" class="button" onclick="updateHref(this)">Question 1 Button D: User answers question 1 with __ behavior</a>
+
+<script type="text/javascript">
+
+    let gs = 0;
+
+    function updateHref(element) {
+        gs++;
+        console.log("gs: ", gs);
+
+        let currentHref = element.getAttribute('href');
+        let q1Value = new URL(currentHref, window.location.origin).searchParams.get('q1'); // Extract q1 value.
+        let gsParamName = `gs${gs}`; // Create parameter name gs1, gs2...
+
+        // Check if q1Value is null or undefined
+        if (!q1Value) {
+            console.error("q1 value is missing in the href.");
+            return; // Exit function
+        }
+
+        let gsValue = `q1${q1Value}`; //Concatenate q1 and its value.
+
+        // Find the index of the existing 'gs' parameter (if it exists)
+        let gsParamIndex = currentHref.indexOf('gs=');
+
+        if (gsParamIndex !== -1) {
+            // If 'gs' parameter exists, remove the old one and add the new value
+            let endOfGsParamIndex = currentHref.indexOf('&', gsParamIndex);
+            if (endOfGsParamIndex === -1) {
+                //  gs parameter is at the end of the URL
+                currentHref = currentHref.substring(0, gsParamIndex) + 'gs=' + gs + '&' + gsParamName + '=' + gsValue;
+            } else {
+                // gs parameter is somewhere in the middle
+                currentHref = currentHref.substring(0, gsParamIndex) + 'gs=' + gs + '&' + gsParamName + '=' + gsValue + currentHref.substring(endOfGsParamIndex);
+            }
+        } else {
+            // If 'gs' parameter doesn't exist, add it to the end
+            currentHref += '&gs=' + gs + '&' + gsParamName + '=' + gsValue;
+        }
+
+        element.setAttribute('href', currentHref);
+    }
+</script>
+</body>
+<footer>
+</footer>
+</html>

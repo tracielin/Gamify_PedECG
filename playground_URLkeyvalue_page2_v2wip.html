@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>URL Key-Value Pairs Javascript</title>
+    <style>
+        .button {
+            background-color: #1c87c9;
+            border: none;
+            color: white;
+            padding: 20px 34px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Question 2</h1>
+<!-- Retains existing question 1 values, adds question 2 values -->
+<button class="button" data-q2value="a1c0" onclick="addParameterAndRedirect(this)">Question 2 Button A: This is a button that stays on page 2 and adds question 2 behavior values of __</button>
+<button class="button" data-q2value="a1c1" onclick="addParameterAndRedirect(this)">Question 2 Button B: This is a button that stays on page 2 and adds question 2 behavior values of __</button>
+<button class="button" data-q2value="a2c0" onclick="addParameterAndRedirect(this)">Question 2 Button C: This is a button that stays on page 2 and adds question 2 behavior values of __</button>
+<button class="button" data-q2value="a2c1" onclick="addParameterAndRedirect(this)">Question 2 Button D: This is a button that stays on page 2 and adds question 2 behavior values of __</button>
+
+<script type="text/javascript">
+
+    let gs = 0; // Initialize gs
+
+    window.onload = function () {
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Access a specific parameter value
+        const paramValue = urlParams.get('paramName');
+
+        // Iterate over all parameters
+        for (const [key, value] of urlParams.entries()) {
+            console.log(`${key}: ${value}`);
+        }
+
+        // Get the 'gs' parameter from the URL and update the global gs variable
+        const gsParam = urlParams.get('gs');
+        if (gsParam) {
+            gs = parseInt(gsParam); // Parse to integer
+            console.log("Initial gs from URL: ", gs);
+        }
+    }
+
+
+    function addParameterAndRedirect(buttonElement) {
+        // Increment gs before constructing the new URL
+        gs++;
+        console.log("Incremented gs: ", gs);
+
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Preserve existing q1 and q2 parameter value.
+        let q1Value = urlParams.get('q1') || '';
+        let q2Value = buttonElement.getAttribute('data-q2value');
+
+        let gsParamName = `gs${gs}`;
+        let gsValue = `q2${q2Value}`;
+
+        // Construct new URL with item3 and existing values
+        const newURL = new URL(window.location.href);
+        newURL.searchParams.set('q1', q1Value);
+        newURL.searchParams.set('q2', q2Value);
+        newURL.searchParams.set('gs', gs); // Add the updated gs
+        newURL.searchParams.set(gsParamName, gsValue);
+
+        //loop through the URL parameters and add them to the new URL to persist the information.
+        for (const [key, value] of urlParams.entries()) {
+            if (!newURL.searchParams.has(key) && key != 'gs') {
+                newURL.searchParams.set(key, value);
+            }
+        }
+
+        // Navigate to the new URL
+        window.location.href = newURL.toString();
+    }
+
+</script>
+
+</body>
+<footer>
+</footer>
+</html>

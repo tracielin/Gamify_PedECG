@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>URL Key-Value Pairs Javascript</title>
+    <style>
+        .button {
+            background-color: #1c87c9;
+            border: none;
+            color: white;
+            padding: 20px 34px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <p>Notice how item1 and item2 retain their values (as given to them from the page 1 click)</p>
+
+    <!-- Retains existing item1 & item2 values, adds item3 -->
+    <button class="button" data-item3value="333" onclick="addParameterAndRedirect(this)">This is a button that stays on page 2 and adds item3=333</button>
+    <button class="button" data-item3value="444" onclick="addParameterAndRedirect(this)">This is a button that stays on page 2 and adds item3=444</button>
+
+
+<script type="text/javascript">
+
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Access a specific parameter value
+        const paramValue = urlParams.get('paramName');
+
+        // Iterate over all parameters
+        for (const [key, value] of urlParams.entries()) {
+            console.log(`${key}: ${value}`);
+        }
+
+        function addParameterAndRedirect(buttonElement) {
+             const urlParams = new URLSearchParams(window.location.search);
+            // Preserve existing item1 and item2 parameters
+            let item1Value = urlParams.get('item1') || '';
+            let item2Value = urlParams.get('item2') || '';
+
+           const item3Value = buttonElement.getAttribute('data-item3value');
+
+            // Construct new URL with item3 and existing values
+            const newURL = new URL(window.location.href);
+             newURL.searchParams.set('item1', item1Value);
+             newURL.searchParams.set('item2', item2Value);
+             newURL.searchParams.set('item3', item3Value);
+
+
+            // Navigate to the new URL
+            window.location.href = newURL.toString();
+        }
+
+
+    </script>
+
+</body>
+<footer>
+</footer>
+</html>

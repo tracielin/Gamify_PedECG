@@ -1,0 +1,221 @@
+html, body {margin: 0; height: 100%; overflow: hidden}
+
+body {
+    font-family: monospace;
+/*    sans-serif;*/
+    width: 100%;
+    background: #FCFCFC;
+}
+
+.scoreboard{
+    margin: 0px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+    text-align: center;
+    font: 10px;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    background: #fff;
+    margin-bottom: -20px;    
+}
+
+.ans {
+    text-align: center;
+}
+
+.ans a {
+    margin-right: 10px;
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: #333;   
+}
+
+.ans a:hover {
+    color: #055;
+}
+
+
+.main {
+    margin: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.questiontitle {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: 1.5rem;
+    padding-top: 10px;
+    scroll-margin-top: 90px;
+}
+
+.answerheader_right {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: 1.5rem;
+    padding-top: 100px;
+    color: green;
+}
+
+.answerheader_wrong {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: 1.5rem;
+    padding-top: 100px;
+    color: darkblue;
+}
+
+.contentbox {
+  height: 100vh;
+}
+
+/* For score board */
+
+* {
+  box-sizing: border-box;
+}
+
+.status-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  padding: 0;
+  margin: 0;
+  font-family: monospace;
+  font-size: clamp(3.2rem, 6vw, 4.8rem);
+  color: var(--text-color);
+}
+
+.bar-wrap {
+  padding: 6px;
+  margin-top: 20px;
+  margin-right: 30px;
+  margin-left: 30px;
+  margin-bottom: 5px;
+  border-radius: 100px;
+  background-color: #eeeeee;
+}
+
+#bar {
+  width: 0%;
+  height: 10px;
+  transition: width .15s ease-out;
+  background: linear-gradient(white, purple 90%, rebeccapurple);
+  border-radius: 100px;
+  box-shadow: inset -1px -1px 10px rgb(0 0 0 / .5);
+}
+
+
+#percentage {
+  align-self: center;
+  margin: 10px 0 25px;
+  font-family: monospace;
+  font-size: 14px;
+  color: black;
+}
+
+.pointslabel {
+  margin: 0;
+  font-size: 14px;
+  color: black;
+  display:inline-block;
+}
+
+.number {
+  margin-left: 8px;
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+.btn-wrap {
+  align-self: center;
+}
+
+.btn-group{
+  background: #DDDDDD;
+  border: solid white 2px;
+  display: inline-flex;
+  height: 180px;
+  border-radius: 30px;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 80px;
+  border: 3px solid black;
+  margin: 1rem;
+  font-family: monospace;
+  font-size: 16px;
+  transition: background .15s, color .15s;
+  border-radius: 30px;
+  background-color: blue;
+  color: white;
+}
+
+.btn:active {
+  background-color: var(--body-color);
+  color: var(--text-color);
+}
+.btn:hover {
+  background-color: lightgray;
+}
+
+
+        /* Custom styles for the dialog pop-in */
+        @import url('https://fonts.googleapis.com/css2?family=Jersey+25&display=swap');
+
+        .jersey-25-regular {
+            font-family: "Jersey 25", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        html {
+            font-family: "Jersey 25", Roboto, sans-serif;
+        }
+
+        /*   IS-OPEN STATE   */
+        dialog[open] {
+            translate: 0 0;
+        }
+
+        /*   EXIT STATE   */
+        dialog {
+            transition: translate 0.7s ease-out, overlay 0.7s ease-out, display 0.7s ease-out allow-discrete;
+            translate: 0 100vh;
+
+            /* other styles */
+            border: 6px solid;
+            border-radius: 20px;
+            box-shadow: 10px 10px 0 darkgray;
+            padding: 20px; /*Added padding to the dialog */
+        }
+
+        /*   0. BEFORE-OPEN STATE   */
+        @starting-style {
+            dialog[open] {
+                translate: 0 100vh;
+            }
+        }
+
+        dialog h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        /* For displaying error message */
+        #errorMessage {
+            color: red;
+            margin-top: 10px;
+        }
+
+        /* Button Highlight Style */
+        .btn.selected {
+            outline: 3px solid yellow;  /*  Highlight outline */
+        }

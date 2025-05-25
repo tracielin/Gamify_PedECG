@@ -1,0 +1,318 @@
+<html>
+<head>
+    <title>Page Title</title>
+
+    <link rel="stylesheet" href="css/jumpto_w_score5.3.css">
+
+    <style>
+
+    </style>
+
+</head>
+<body>
+
+<section class="scoreboard">
+
+    <div class="status-info">
+        <div class="bar-wrap">
+            <div id="bar"></div>
+        </div>
+
+        <p class="pointslabel">METs (Motivation/Endurance/Tenacity Points): <span class="number" id="met-score"></span></p>
+
+        <p class="pointslabel">Level Completion: <span id="percentage"></span> </p>
+
+    </div>
+
+</section>
+
+
+<section class="main">
+    <h2 id="question1" class="questiontitle">Question #1</h2>
+    <div class="contentbox">
+        The body of question #1 goes here.
+        <p>Is the ST/T pattern you see a normal variant or pathological?</p>
+
+        <div class="btn-wrap">
+            <div class="btn-group">
+                <button class="btn" id="rightAnswerBtn" type="button">Normal Variant</button>
+                <button class="btn" id="wrongAnswerBtn" type="button">Pathological</button>
+            </div>
+
+            <div>
+                <input type="radio" id="confidenceLow" name="confidence" value="low">
+                <label for="confidenceLow">Low Confidence</label><br>
+                <input type="radio" id="confidenceHigh" name="confidence" value="high">
+                <label for="confidenceHigh">High Confidence</label>
+            </div>
+
+            <button id="submitAnswerBtn" disabled style="background-color: gray; cursor: not-allowed;">Submit Answer</button>
+            <div id="errorMessage">Error message here?</div> <!-- For Error Message -->
+        </div>
+
+    </div>
+
+    <h2 id="ans_right_unsure" class="answerheader_right">Explanation for Question 1 Right (Unsure)</h2>
+    <div class="contentbox">
+        person clicked the right answer but was unsure
+        <a href="#question2">Go to Question 2</a>
+        <a href="#question1">Retry question 1 because I haven't programmed a question 2 yet</a>
+    </div>
+
+    <h2 id="ans_right_confid" class="answerheader_right">Explanation for Question 1 Right (Confident)</h2>
+    <div class="contentbox">person clicked the right answer and was confident
+        <p>Nice. For bonus points, why was that the right answer? (Maybe some additional points iterator here.)</p>
+        <a href="#question2">Go to Question 2</a>
+        <a href="#question1">Retry question 1 because I haven't programmed a question 2 yet</a>
+    </div>
+
+    <h2 id="ans_wrong_unsure" class="answerheader_wrong">Explanation for Question 1 Wrong (Unsure)</h2>
+    <div class="contentbox">
+        person clicked wrong answer but was unsure
+        <p>Sorry, the answer was __. Explanation for why.</p>
+        <a href="#question1">Retry question 1.</a>
+    </div>
+
+    <h2 id="ans_wrong_confid" class="answerheader_wrong">Explanation for Question 1 Wrong (Confident)</h2>
+    <div class="contentbox">
+        person clicked the wrong answer and was confidently wrong
+        <p>Sorry, the answer was __. Explanation for why.</p>
+        <a href="#question1">Retry question 1.</a>
+    </div>
+</section>
+
+<dialog id="dialogRightUnsure">
+    <h2>Nice job!</h2>
+    <p>"Normal variant" was the correct answer.</p>
+    <form method="dialog">
+        <button id="continueRightUnsure" type="button">Continue</button>
+    </form>
+</dialog>
+
+<dialog id="dialogRightConfident">
+    <h2>Excellent!</h2>
+    <p>"Normal variant" was indeed the correct answer. Confident and correct!</p>
+    <form method="dialog">
+        <button id="continueRightConfident" type="button">Continue</button>
+    </form>
+</dialog>
+
+<dialog id="dialogWrongUnsure">
+    <h2>Sorry, not quite!</h2>
+    <p>"Normal variant" was the correct answer. Don't worry, keep trying! Let's talk about why "normal variant" was the better answer.</p>
+    <form method="dialog">
+        <button id="continueWrongUnsure" type="button">Continue</button>
+    </form>
+</dialog>
+
+<dialog id="dialogWrongConfident">
+    <h2>Oops!</h2>
+    <p>"Normal variant" was the correct answer. Let's talk about why "normal variant" was the better answer.</p>
+    <form method="dialog">
+        <button id="continueWrongConfident" type="button">Continue</button>
+    </form>
+</dialog>
+
+</body>
+
+<script>
+
+const rightAnswerBtn = document.getElementById('rightAnswerBtn');
+const wrongAnswerBtn = document.getElementById('wrongAnswerBtn');
+const confidenceLow = document.getElementById('confidenceLow');
+const confidenceHigh = document.getElementById('confidenceHigh');
+const submitAnswerBtn = document.getElementById('submitAnswerBtn');
+const errorMessage = document.getElementById('errorMessage');
+let selectedAnswer = null;
+
+//Dialogs
+const dialogRightUnsure = document.getElementById('dialogRightUnsure');
+const dialogRightConfident = document.getElementById('dialogRightConfident');
+const dialogWrongUnsure = document.getElementById('dialogWrongUnsure');
+const dialogWrongConfident = document.getElementById('dialogWrongConfident');
+
+//Continue buttons
+const continueRightUnsureBtn = document.getElementById('continueRightUnsure');
+const continueRightConfidentBtn = document.getElementById('continueRightConfident');
+const continueWrongUnsureBtn = document.getElementById('continueWrongUnsure');
+const continueWrongConfidentBtn = document.getElementById('continueWrongConfident');
+
+
+// Function to enable/disable submit button
+function updateSubmitButtonState() {
+    if (selectedAnswer !== null && (confidenceLow.checked || confidenceHigh.checked)) {
+        submitAnswerBtn.disabled = false;
+        submitAnswerBtn.style.backgroundColor = ''; // Revert to default or your chosen color
+        submitAnswerBtn.style.cursor = 'pointer';
+    } else {
+        submitAnswerBtn.disabled = true;
+        submitAnswerBtn.style.backgroundColor = 'gray';
+        submitAnswerBtn.style.cursor = 'not-allowed';
+    }
+}
+
+// Function to clear button highlights
+function clearButtonHighlights() {
+    rightAnswerBtn.classList.remove('selected');
+    wrongAnswerBtn.classList.remove('selected');
+}
+
+// Answer button click handlers
+rightAnswerBtn.addEventListener('click', () => {
+    selectedAnswer = true;
+    clearButtonHighlights();
+    rightAnswerBtn.classList.add('selected');
+    updateSubmitButtonState();
+});
+
+wrongAnswerBtn.addEventListener('click', () => {
+    selectedAnswer = false;
+    clearButtonHighlights();
+    wrongAnswerBtn.classList.add('selected');
+    updateSubmitButtonState();
+});
+
+// Confidence radio button handlers
+confidenceLow.addEventListener('change', updateSubmitButtonState);
+confidenceHigh.addEventListener('change', updateSubmitButtonState);
+
+// Submit button click handler
+submitAnswerBtn.addEventListener('click', () => {
+    if (selectedAnswer === null || (!confidenceLow.checked && !confidenceHigh.checked)) {
+        errorMessage.textContent = "Oops, you need to choose both an answer and confidence level to proceed.";
+        return; // Stop execution
+    } else {
+        errorMessage.textContent = ""; // Clear any previous error message
+    }
+
+    // Proceed with answer submission, but now just show the dialog
+    const confidenceLevel = document.querySelector('input[name="confidence"]:checked').value;
+
+    if (selectedAnswer) {
+        if (confidenceLevel === "low") {
+            dialogRightUnsure.showModal();
+        } else {
+            dialogRightConfident.showModal();
+        }
+    } else {
+        if (confidenceLevel === "low") {
+            dialogWrongUnsure.showModal();
+        } else {
+            dialogWrongConfident.showModal();
+        }
+    }
+});
+
+// event function of button onclick
+function scrollInto(id) {
+    var elmnt = document.getElementById(id);
+    if (elmnt) {
+        elmnt.scrollIntoView({
+            behavior: "instant",
+            block: "start",
+            inline: "nearest"
+        });
+    } else {
+        console.warn(`Element with id "${id}" not found.`);
+    }
+}
+
+// score board
+const bar = document.querySelector("#bar");
+const percentageTag = document.querySelector("#percentage");
+const totalTag = document.querySelector("#num1");
+const solvedTag = document.querySelector("#num2");
+const total = 6;
+var total_minus1 = total - 1;
+let solved = 0;
+let met = 0;
+let percentage = 0;
+
+const ruleOfThree = (total, solved) => {
+    const proportion = (solved * 100) / total;
+    return Math.round(proportion * 10) / 10;
+};
+
+const updateBarLength = () => {
+    const percentage = ruleOfThree(total, solved);
+    bar.style.width = percentage + "%";
+};
+
+const updateText = () => {
+    const percentage = ruleOfThree(total, solved);
+    document.querySelector("#percentage").textContent = percentage + "%";
+};
+
+const updateMetText = () => {
+    document.querySelector("#met-score").textContent = met;
+}
+
+function backgroundcolor_win() {
+    bar.style.background = 'linear-gradient(white, green 90%, white)';
+};
+
+
+// Add event listeners to continue buttons
+
+continueRightUnsureBtn.addEventListener('click', () => {
+    dialogRightUnsure.close();
+    scrollInto("ans_right_unsure");
+    solved = Math.min(solved + 1, total);
+    updateScore();
+    resetQuestion();
+});
+
+continueRightConfidentBtn.addEventListener('click', () => {
+    dialogRightConfident.close();
+    scrollInto("ans_right_confid");
+    solved = Math.min(solved + 2, total);
+    updateScore();
+    resetQuestion();
+});
+
+continueWrongUnsureBtn.addEventListener('click', () => {
+    dialogWrongUnsure.close();
+    scrollInto("ans_wrong_unsure");
+    updateScore();
+    resetQuestion();
+});
+
+continueWrongConfidentBtn.addEventListener('click', () => {
+    dialogWrongConfident.close();
+    scrollInto("ans_wrong_confid");
+    solved = Math.max(solved - 2, 0);
+    updateScore();
+    resetQuestion();
+});
+
+function updateScore() {
+    met = met+1.5;
+    updateMetText();
+    solved = Math.max(0, Math.min(solved, total));
+    updateBarLength();
+    updateText();
+
+    if (solved >= total) {
+        backgroundcolor_win();
+    } else {
+        bar.style.background = 'linear-gradient(white, purple 90%, rebeccapurple)'; //reset win color
+    }
+
+    totalTag.textContent = total; // Updates the display of the Total number
+    solvedTag.textContent = solved; // Updates the display of the Solved number
+}
+
+function resetQuestion() {
+    clearButtonHighlights();
+    confidenceLow.checked = false;
+    confidenceHigh.checked = false;
+    selectedAnswer = null;
+    updateSubmitButtonState();
+}
+
+totalTag.textContent = total;
+solvedTag.textContent = solved;
+percentageTag.textContent = ruleOfThree(total, solved) + "%";
+updateMetText();
+</script>
+</html>

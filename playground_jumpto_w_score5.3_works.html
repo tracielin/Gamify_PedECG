@@ -251,7 +251,6 @@ function backgroundcolor_win() {
     bar.style.background = 'linear-gradient(white, green 90%, white)';
 };
 
-
 // Add event listeners to continue buttons
 
 continueRightUnsureBtn.addEventListener('click', () => {
@@ -286,7 +285,7 @@ continueWrongConfidentBtn.addEventListener('click', () => {
 });
 
 function updateScore() {
-    met = met+1.5;
+    met = met+1;
     updateMetText();
     solved = Math.max(0, Math.min(solved, total));
     updateBarLength();

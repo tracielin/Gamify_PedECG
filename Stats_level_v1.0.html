@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Art Game Frame</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+25&display=swap" rel="stylesheet">
+    <style>
+        /* Global styles for the body and font */
+        body {
+            display: flex;
+            flex-direction: column; /* Changed to column to stack frames vertically */
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* Full viewport height */
+            background-color: #1C1C3A; /* Dark blue/purple from website background */
+            margin: 0; /* Remove default body margin */
+            font-family: 'Jersey 25', sans-serif; /* Apply new font */
+            color: #f7fafc; /* Light text color for overall page */
+            gap: 20px; /* Add space between the two frames */
+        }
+
+        /* Common styles for all frame containers */
+        .outer-frame {
+            padding: 8px; /* p-2 equivalent (1 unit = 4px, so 2 units = 8px) */
+            border-radius: 5px; /* rounded-sm equivalent (1 unit = 2px) */
+            box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.8); /* Hard, blocky shadow */
+            max-width: 50vw; /* Max-width for the player stats frame */
+        }
+        .outer-frame-met { /* New class for MET goals frame to allow different max-width */
+            padding: 8px; /* p-2 equivalent (1 unit = 4px, so 2 units = 8px) */
+            border-radius: 2px; /* rounded-sm equivalent (1 unit = 2px) */
+            box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.8); /* Hard, blocky shadow */
+            max-width: 80vw; /* Max-width for the MET goals frame */
+        }
+
+
+        .middle-frame {
+            padding: 8px; /* p-2 equivalent */
+            border-radius: 5px; /* rounded-sm equivalent */
+        }
+
+        .inner-content {
+            padding: 16px; /* p-4 equivalent */
+            border-radius: 5px; /* rounded-sm equivalent */
+            font-size: 1.8rem; /* Increased font size for content */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 200px; /* min-w-[200px] equivalent */
+            min-height: 150px; /* min-h-[150px] equivalent */
+            text-align: center; /* Center text within the content area */
+        }
+
+        /* Specific styling for titles within content areas */
+        .inner-content h2 {
+            font-size: 2rem; /* Increased font size for titles */
+            margin-bottom: 8px; /* mb-2 equivalent */
+        }
+
+        /* Specific styling for paragraphs within content areas */
+        .inner-content p {
+            margin-bottom: 4px; /* Small margin between stats */
+        }
+
+        /* PLAYER STATS Box Colors (green box - now with higher contrast) */
+        .player-stats-frame.outer-frame {
+            background-color: #7090B0; /* Darker green for outer frame */
+            border: 2px solid #051005; /* Even darker green for outer border */
+        }
+
+        .player-stats-frame .middle-frame {
+            background-color: #406040; /* Darker mid-green for middle frame */
+            border: 2px solid #203520; /* Matching outer frame background for middle border */
+        }
+
+        .player-stats-frame .inner-content {
+            background-color: #F8FFFF; /* Slightly brighter cream for content area */
+            color: #102010; /* Very dark green for text on light background */
+        }
+
+
+        .met-goals-frame.outer-frame-met {
+            background-color: #4A4A7B; /* Slightly lighter blue/purple for outer frame */
+            border: 2px solid #2A2A40; /* Slightly lighter dark blue/purple for outer border */
+        }
+
+        .met-goals-frame .middle-frame { /* Uncommented this block */
+            background-color: #7090B0;
+            border: 2px solid #4A4A7B;
+        }
+
+        .met-goals-frame .inner-content {
+            background-color: #F0F5F8; /* Slightly less bright off-white for content area */
+            color: #2C2C4A; /* Slightly lighter dark blue/purple for text on light background */
+            padding-top: 8px; /* Reduced top padding */
+            padding-bottom: 8px; /* Reduced bottom padding */
+            min-height: auto; /* Allow height to adjust to content */
+        }
+
+        /* Adjust min-height for the MET goals box if needed to fit content */
+        /* Removed min-height from .met-goals-content to allow content to dictate height */
+
+        /* Specific styling for the MET GOALS title to reduce its margins */
+        .met-goals-content h2 {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        /* Reduced paragraph spacing for MET GOALS box */
+        .met-goals-content p {
+            margin-bottom: 2px; /* Reduced margin for paragraphs */
+        }
+    </style>
+</head>
+<body>
+    <div class="outer-frame player-stats-frame">
+        <div class="middle-frame">
+            <div class="inner-content">
+                <h2>PLAYER STATS: LEVEL 1</h2>
+                <p>METS (motivation/endurance/tenacity points): 5</p>
+                <br>
+                <p>It looks like you got some good exercise, but I think you could be up for more of a challenge. Let's try the next level!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="outer-frame-met met-goals-frame">
+        <div class="middle-frame">
+            <div class="inner-content met-goals-content">
+                <h2>MET GOALS</h2> <p>MET 3 or less: Light exercise | MET 4 - 6: Moderate exercise | MET 7 or greater: Intense workout</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    </script>
+</body>
+</html>

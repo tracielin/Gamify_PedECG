@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pediatric ECG Adventure Game Rooms</title>
+
+ <!-- Google Fonts Link for Jersey 25 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+25&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/index_wip.css">
+
+</head>
+
+<body> <!-- Single, correct body tag -->
+
+<div class="content">
+  <h1 class="heading">Pediatric ECG Adventure Game Rooms</h1>
+  <p class="description">Select a game below. Your ECG learning adventure awaits...</p>
+  <p class="description">UNDER CONSTRUCTION. CURRENT LINKS ARE PLACEHOLDERS ONLY.</p>
+  <br>
+  <p class="description">
+    <a href="playground_jumpto_w_score5.3_works.html">playground_jumpto_w_score5.3_works.html</a>
+    <br>  
+    <a href="Stats_level_v1.0.html">Stats_level_v1.0.html</a>
+  </p>
+</div>
+
+<div id="background-image-container">
+  <!-- The old #background-image-div is replaced by these two layers -->
+  <div class="background-image-layer" id="bg-layer-1"></div>
+  <div class="background-image-layer" id="bg-layer-2"></div>
+</div>
+
+<div class="container">
+  <div class="projects-container">
+    <!-- Game modules rendered here by JavaScript -->
+  </div>
+</div>
+
+<footer>
+    <!-- Styling was inspired by https://codepen.io/filipz/pen/GggKVGO -->
+</footer>
+
+<script>
+  // Project data (using local image paths as per previous step)
+  const projects = [
+    {
+      id: 1,
+      title: "Basics",
+      year: "Age-related normals and the systematic interpretation of 12-lead ECGs",
+      image: "imgs/exit_greenery.jpeg", // Example local path
+      link: "basics_game.html"
+    },
+    {
+      id: 2,
+      title: "Rhythm abnormalities",
+      year: "Rate determination, bradycardia, tachycardia, AV block",
+      image: "imgs/brickwall4.jpg", // Example local path
+      link: "rhythm_game.html"
+    },
+    {
+      id: 3,
+      title: "ST Segments",
+      year: "Normal, abnormal, pericarditis, myocarditis",
+      image: "imgs/stonewall4.jpg", // Example local path
+      link: "st_segments_game.html"
+    },
+    {
+      id: 4,
+      title: "Too Tall, Too Wide, and Axis Shifts",
+      year: "Atrial hypertrophy, ventricular hypertrophy, bundle branch block",
+      image: "imgs/stonewall9.jpg", // Example local path
+      link: "hypertrophy_axis_game.html"
+    },
+    {
+      id: 5,
+      title: "It's Not the Heart",
+      year: "Electrolyte abnormalities, toxidromes",
+      image: "imgs/warehouse.jpg", // Example local path
+      link: "systemic_ecg_game.html"
+    },
+    {
+      id: 6,
+      title: "Technical Errors",
+      year: "Artifact, Limb Lead Reversal",
+      image: "imgs/woodwall.jpg", // Example local path
+      link: "technical_errors_game.html"
+    },
+        {
+      id: 7,
+      title: "Challenge Me",
+      year: "Any topic may be covered",
+      image: "imgs/stonewall8.jpg", // Example local path
+      link: "technical_errors_game.html"
+    },
+  ];
+
+  let bgLayer1, bgLayer2;
+  let activeBgLayer, inactiveBgLayer;
+  const defaultImageUrl = "imgs/Scene_mountains_01_HiRes.png"; // Your default image URL
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const projectsContainer = document.querySelector(".projects-container");
+    
+    bgLayer1 = document.getElementById("bg-layer-1");
+    bgLayer2 = document.getElementById("bg-layer-2");
+
+    // Set initial background on bgLayer1
+    bgLayer1.style.backgroundImage = `url('${defaultImageUrl}')`;
+    bgLayer1.style.opacity = "1"; // Make it visible
+
+    // Define which layer is active and inactive initially
+    activeBgLayer = bgLayer1;
+    inactiveBgLayer = bgLayer2;
+
+    console.log("Initial background on active layer:", activeBgLayer.id, activeBgLayer.style.backgroundImage);
+
+    renderProjects(projectsContainer);
+    initialAnimation();
+    preloadImages(defaultImageUrl); 
+    setupHoverEvents(projectsContainer, defaultImageUrl);
+  });
+
+  function renderProjects(container) {
+    projects.forEach((project) => {
+      const projectItem = document.createElement("a"); 
+      projectItem.classList.add("project-item");
+      projectItem.href = project.link; 
+      projectItem.dataset.id = project.id;
+      projectItem.dataset.image = project.image; 
+      projectItem.innerHTML = `
+        <div class="project-title">${project.title}</div>
+        <div class="project-year">${project.year}</div>
+      `;
+      container.appendChild(projectItem);
+    });
+  }
+
+  function initialAnimation() {
+    const projectItems = document.querySelectorAll(".project-item");
+    projectItems.forEach((item, index) => {
+      item.style.opacity = "0";
+      item.style.transform = "translateY(20px)";
+      setTimeout(() => {
+        item.style.transition = "opacity 0.2s ease"; // Ensure this doesn't conflict with other transitions
+        item.style.opacity = "1";
+        item.style.transform = "translateY(0)";
+      }, index * 80);
+    });
+  }
+
+  function setupHoverEvents(projectsContainer, defaultImageUrl) {
+    const projectItems = document.querySelectorAll(".project-item");
+
+    projectItems.forEach((item) => {
+      item.addEventListener("mouseenter", function () {
+        const newHoverUrl = this.dataset.image;
+
+        const currentBgStyle = activeBgLayer.style.backgroundImage;
+        // Regex to extract URL from "url(...)" string, handling optional quotes
+        const match = currentBgStyle.match(/url\("?([^"]+)"?\)/);
+        const currentActiveImageUrl = match ? match[1].replace(window.location.origin, '') : null; // Normalize for comparison if needed
+        
+        // Normalize newHoverUrl in case it's absolute vs relative
+        const normalizedNewHoverUrl = newHoverUrl.startsWith('http') ? new URL(newHoverUrl).pathname : newHoverUrl;
+
+
+        if (currentActiveImageUrl === normalizedNewHoverUrl && parseFloat(getComputedStyle(activeBgLayer).opacity) === 1) {
+          return; // Already showing this image and it's fully visible
+        }
+
+        // Set the new image on the currently inactive layer
+        inactiveBgLayer.style.backgroundImage = `url('${newHoverUrl}')`;
+
+        // Fade out the (previously) active layer
+        activeBgLayer.style.opacity = "0";
+        // Fade in the (previously) inactive layer (which now has the new image)
+        inactiveBgLayer.style.opacity = "1";
+
+        // Swap active and inactive layer references
+        const temp = activeBgLayer;
+        activeBgLayer = inactiveBgLayer;
+        inactiveBgLayer = temp;
+      });
+    });
+
+    projectsContainer.addEventListener("mouseleave", function () {
+      const currentBgStyle = activeBgLayer.style.backgroundImage;
+      const match = currentBgStyle.match(/url\("?([^"]+)"?\)/);
+      const currentActiveImageUrl = match ? match[1].replace(window.location.origin, '') : null;
+      const normalizedDefaultImageUrl = defaultImageUrl.startsWith('http') ? new URL(defaultImageUrl).pathname : defaultImageUrl;
+
+
+      if (currentActiveImageUrl === normalizedDefaultImageUrl && parseFloat(getComputedStyle(activeBgLayer).opacity) === 1) {
+        return; // Already showing default and it's fully visible
+      }
+
+      // Set default image on the currently inactive layer
+      inactiveBgLayer.style.backgroundImage = `url('${defaultImageUrl}')`;
+
+      // Fade out current active layer
+      activeBgLayer.style.opacity = "0";
+      // Fade in the layer with the default image
+      inactiveBgLayer.style.opacity = "1";
+
+      // Swap active and inactive layer references
+      const temp = activeBgLayer;
+      activeBgLayer = inactiveBgLayer;
+      inactiveBgLayer = temp;
+    });
+  }
+
+  function preloadImages(defaultImageUrl) {
+    const defaultImg = new Image();
+    defaultImg.src = defaultImageUrl;
+
+    projects.forEach((project) => {
+      if (project.image !== defaultImageUrl) { 
+        const img = new Image();
+        img.src = project.image;
+      }
+    });
+  }
+</script>
+
+</body>
+</html>

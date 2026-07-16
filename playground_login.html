@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Firebase Auth Example</title>
+</head>
+<body>
+
+  
+  <p id="greeting">Hello, User!</p>
+
+  <!-- Login/Logout Buttons -->
+  <button id="login-btn">Sign in with Google</button>
+  <button id="logout-btn" style="display: none;">Sign out</button>
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-analytics.js";
+    
+    // Import Firebase Auth functions
+    import { 
+      getAuth, 
+      signInWithPopup, 
+      GoogleAuthProvider, 
+      onAuthStateChanged, 
+      signOut 
+    } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+
+    // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDtLmzOCv0yPrBQ6I0CK5M6UBBNyPaUX5s",
+    authDomain: "playground-bdfdb.firebaseapp.com",
+    projectId: "playground-bdfdb",
+    storageBucket: "playground-bdfdb.firebasestorage.app",
+    messagingSenderId: "586869845092",
+    appId: "1:586869845092:web:5d94bedd9de47cc4164371",
+    measurementId: "G-Y9ZZQWQ3V9"
+  };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+    // Initialize Firebase Auth and the Google Provider
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    // Get references to HTML elements
+    const greetingText = document.getElementById("greeting");
+    const loginBtn = document.getElementById("login-btn");
+    const logoutBtn = document.getElementById("logout-btn");
+
+    // Trigger Google Sign-In when clicking the login button
+    loginBtn.addEventListener("click", () => {
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          console.log("Successfully signed in:", result.user);
+        })
+        .catch((error) => {
+          console.error("Error during sign-in:", error);
+        });
+    });
+
+    // Sign out when clicking the logout button
+    logoutBtn.addEventListener("click", () => {
+      signOut(auth)
+        .then(() => {
+          console.log("Successfully signed out");
+        })
+        .catch((error) => {
+          console.error("Error during sign-out:", error);
+        });
+    });
+
+    // Monitor changes in the authentication state
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in. Update greeting and buttons.
+        greetingText.textContent = `Hello, ${user.displayName || "User"}!`;
+        loginBtn.style.display = "none";
+        logoutBtn.style.display = "inline-block";
+      } else {
+        // User is signed out. Update greeting and buttons.
+        greetingText.textContent = "Hello, User!";
+        loginBtn.style.display = "inline-block";
+        logoutBtn.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>

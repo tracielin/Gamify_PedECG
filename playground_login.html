@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Firebase Auth Example</title>
+  <title>Firebase Authentication Test</title>
 </head>
 <body>
 
@@ -77,7 +77,7 @@
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in. Update greeting and buttons.
-        greetingText.textContent = `Hello, ${user.displayName || "User"}!`;
+        greetingText.textContent = `Hello ${user.displayName || "User"}!`;
         loginBtn.style.display = "none";
         logoutBtn.style.display = "inline-block";
       } else {
